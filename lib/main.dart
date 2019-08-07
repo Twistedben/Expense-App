@@ -49,7 +49,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _userTransactions = [
     // Transaction(
     //     id: 't1', title: 'New Shoes', amount: 69.99, date: DateTime.now()),
@@ -60,6 +60,23 @@ class _MyHomePageState extends State<MyHomePage> {
     //     date: DateTime.now()),
   ];
   bool _showChart = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
 
   // A getter to provide the last week of transactions
   List<Transaction> get _recentTransactions {
@@ -93,11 +110,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _deleteTransaction(String id) {
-    setState(() {
-      _userTransactions.removeWhere((tx) {
-        return tx.id == id;
-      });
-    });
+    setState(
+      () {
+        _userTransactions.removeWhere(
+          (tx) {
+            return tx.id == id;
+          },
+        );
+      },
+    );
   }
 
   List<Widget> _buildLandscapeContent(
