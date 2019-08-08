@@ -15,8 +15,10 @@ class TransactionList extends StatelessWidget {
         ? LayoutBuilder(builder: (ctx, constraints) {
             return Column(
               children: <Widget>[
-                Text('Add a new Transactions below!',
-                    style: Theme.of(context).textTheme.title),
+                Text(
+                  'Add a new Transactions below!',
+                  style: Theme.of(context).textTheme.title,
+                ),
                 Container(
                   height: constraints.maxHeight * 0.6,
                   margin: EdgeInsets.all(10),
@@ -30,11 +32,11 @@ class TransactionList extends StatelessWidget {
           })
         : ListView.builder(
             itemBuilder: (ctx, index) {
-              return TransactionItem(transaction: transactions[index], deleteTransaction: deleteTransaction);
+              return TransactionItem(
+                  transaction: transactions[index],
+                  deleteTransaction: deleteTransaction);
             },
             itemCount: transactions.length,
           );
   }
 }
-
-
