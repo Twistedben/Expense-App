@@ -1,4 +1,4 @@
-# expense_app
+# Mobile Expense App
 
 A Mobile App written in Dart and Flutter that keeps track of weekly expenses and illustrates the percentage spent each day in a week on a bar graph.
 
